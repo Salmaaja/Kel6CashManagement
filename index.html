@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Cash Management System - Bendahara</title>
+  <style>
+    body { 
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+    }
+    body{
+        overflow: hidden;
+        color:#006400; 
+        font-family:"Courier New"; 
+        font-size: 20px;
+        background-image: url('bg cash management.JPEG'); 
+        background-size: cover;
+        background-position:center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+    .section { display:none; position: absolute; top: 0;left: 0;right: 0;bottom: 0;padding: 40px;overflow: auto;}
+    .active { display:block; }
+    input, button { 
+      background:#fff; 
+      color:#006400; 
+      border:none; 
+      border-bottom:1px solid #006400; 
+      width:250px; 
+      margin:5px 0; 
+      font-size: 18px;
+    }
+    button { 
+      background:#fff; 
+      color:#006400; 
+      border:1px solid #006400; 
+      padding:5px 10px; 
+      margin-top:10px; 
+      cursor:pointer; 
+      font-size: 18px;
+    }
+    button:hover { background:#006400; color:#fff; }
+    table { border-collapse:collapse; width:100%; margin-top:10px; }
+    th, td { border:1px solid #006400; padding:8px; text-align:center; }
+    .output { margin-top:20px; border-top:1px dashed #006400; padding-top:10px; }
+  </style>
+</head>
+<body>
+  <h2>Cash Management System </h2>
+
+  <!-- Login -->
+  <div id="login" class="section active">
+    <h3>> Login Bendahara</h3>
+    <input type="text" placeholder="Username"><br>
+    <input type="password" placeholder="Password"><br>
+    <button onclick="nextSection('verify')">Login</button>
+  </div>
+
+  <!-- Verifikasi -->
+  <div id="verify" class="section">
+    <h3>> Daftar Pembayaran Anggota</h3>
+    <table>
+      <tr>
+        <th>Nama</th>
+        <th>Periode</th>
+        <th>Jumlah</th>
+        <th>Status</th>
+        <th>Aksi</th>
+      </tr>
+      <tr>
+        <td>Aisyah</td>
+        <td>Juni 2026</td>
+        <td>Rp50.000</td>
+        <td>Pending</td>
+        <td>
+          <button onclick="updateStatus(this,'Verified')">Approve</button>
+          <button onclick="updateStatus(this,'Rejected')">Reject</button>
+        </td>
+      </tr>
+      <tr>
+        <td>Sevina</td>
+        <td>Juni 2026</td>
+        <td>Rp50.000</td>
+        <td>Verified</td>
+        <td>
+            <button onclick="updateStatus(this,'Verified')">Approve</button>
+            <button onclick="updateStatus(this,'Rejected')">Reject</button>
+        </td>
+      </tr>
+      <tr>
+        <td>Zalea</td>
+        <td>Juni 2026</td>
+        <td>Rp50.000</td>
+        <td>Pending</td>
+        <td>
+          <button onclick="updateStatus(this,'Verified')">Approve</button>
+          <button onclick="updateStatus(this,'Rejected')">Reject</button>
+        </td>
+      </tr>
+      <tr>
+        <td>Zia</td>
+        <td>Juni 2026</td>
+        <td>Rp50.000</td>
+        <td>Verified</td>
+        <td>
+            <button onclick="updateStatus(this,'Verified')">Approve</button>
+            <button onclick="updateStatus(this,'Rejected')">Reject</button>
+        </td>
+      </tr>
+    </table>
+    <br>
+    <button onclick="nextSection('report')">Next</button>
+  </div>
+
+  <!-- Laporan -->
+  <div id="report" class="section">
+    <h3>> Laporan Kas Organisasi</h3>
+    <table>
+        <tr>
+            <th>Kategori</th>
+            <th>Jumlah</th>
+            <th>Keterangan</th>
+        </tr>
+        <tr>
+            <td>Total Penerimaan</td>
+            <td>Rp500.000</td>
+            <td>Penerimaan kas dari iuran anggota Juni 2026</td>
+          </tr>
+          <tr>
+            <td>Total Pengeluaran</td>
+            <td>Rp200.000</td>
+            <td>Pengeluaran untuk operasional organisasi Juni 2026</td>
+          </tr>
+          <tr>
+            <td>Saldo Akhir</td>
+            <td>Rp300.000</td>
+            <td>Sisa kas setelah penerimaan dan pengeluaran Juni 2026</td>
+          </tr>
+    </table>
+    <br>
+    <button onclick="nextSection('logout')">Next</</button>
+</div>
+ 
+ <!-- Logout -->
+  <div id="logout" class="section">
+    <h3>> Logout</h3>
+    <p>Anda telah keluar dari sistem.</p>
+    <button onclick="nextSection('login')">Kembali ke Login</button>
+  </div>
+
+  <script>
+    function nextSection(id) {
+      document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+    function updateStatus(button, status) {
+      let row = button.parentElement.parentElement;
+      row.cells[3].innerText = status;
+      row.cells[4].innerHTML = "-"; // hapus tombol setelah verifikasi
+      alert("Status pembayaran diubah menjadi: " + status);
+    }
+  </script>
+</body>
+</html> 
